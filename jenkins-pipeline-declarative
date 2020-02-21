@@ -1,0 +1,44 @@
+pipeline {
+    agent any
+     tools {
+        maven 'maven3'
+        jdk 'openjdk8'
+    }
+    stages {
+         stage("checkout code") {
+            steps {
+                echo 'checkout the code from scm'
+            git 'https://github.com/vedantek/java-maven-war'
+            }
+        }
+        stage('Build') {
+            steps {
+                echo 'Building..'
+               sh 'mvn -Dmaven.test.failure.ignore=true install'
+                
+            }
+        }
+        stage('Test') {
+            steps {
+                echo 'Testing..'
+              
+            }
+        }
+        stage('Deploy') {
+            steps {
+                echo 'Deploying....'
+                s3Upload consoleLogLevel: 'INFO', dontSetBuildResultOnFailure: false, dontWaitForConcurrentBuildCompletion: false, entries: [[bucket: 'dev-repo-cicd', excludedFile: '', flatten: false, gzipFiles: false, keepForever: false, managedArtifacts: false, noUploadOnFailure: false, selectedRegion: 'us-east-1', showDirectlyInBrowser: false, sourceFile: 'target/*.war', storageClass: 'STANDARD', uploadFromSlave: false, useServerSideEncryption: false]], pluginFailureResultConstraint: 'FAILURE', profileName: 's3-test', userMetadata: []
+            }
+        }
+       stage('Slack Notification'){
+           steps{
+       slackSend baseUrl: 'https://hooks.slack.com/services/',
+       channel: '#jenkins',
+       color: 'good', 
+       message: 'Welcome to Jenkins, Slack!', 
+       teamDomain: 'vedantek',
+       tokenCredentialId: 'slack'
+           }
+   }
+    }
+}
