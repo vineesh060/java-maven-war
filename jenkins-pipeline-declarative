@@ -25,16 +25,15 @@ pipeline {
               
             }
         }
-        stage('Deploy') {
+        stage('Publish') {
             steps {
                 echo 'Deploying....'
-                s3Upload consoleLogLevel: 'INFO', dontSetBuildResultOnFailure: false, dontWaitForConcurrentBuildCompletion: false, entries: [[bucket: 'dev-repo-cicd', excludedFile: '', flatten: false, gzipFiles: false, keepForever: false, managedArtifacts: false, noUploadOnFailure: false, selectedRegion: 'us-east-1', showDirectlyInBrowser: false, sourceFile: 'target/*.war', storageClass: 'STANDARD', uploadFromSlave: false, useServerSideEncryption: false]], pluginFailureResultConstraint: 'FAILURE', profileName: 's3-test', userMetadata: []
-            }
+                s3Upload consoleLogLevel: 'INFO', dontSetBuildResultOnFailure: false, dontWaitForConcurrentBuildCompletion: false, entries: [[bucket: 'jenkins-s3-test11', excludedFile: '', flatten: false, gzipFiles: false, keepForever: false, managedArtifacts: false, noUploadOnFailure: false, selectedRegion: 'us-east-1', showDirectlyInBrowser: false, sourceFile: 'target/*.war', storageClass: 'STANDARD', uploadFromSlave: false, useServerSideEncryption: false]], pluginFailureResultConstraint: 'FAILURE', profileName: 's3-test', userMetadata: []  }
         }
        stage('Slack Notification'){
            steps{
        slackSend baseUrl: 'https://hooks.slack.com/services/',
-       channel: '#jenkins',
+       channel: '#cicd',
        color: 'good', 
        message: 'Welcome to Jenkins, Slack!', 
        teamDomain: 'vedantek',
