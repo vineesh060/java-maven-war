@@ -1,6 +1,6 @@
 node{
    stage('SCM Checkout'){
-     git 'https://github.com/vedantek/jenkins-labs'
+     git 'https://github.com/vedantek/java-maven-war'
    }
    stage('Compile-Package'){
       // Get maven home path
