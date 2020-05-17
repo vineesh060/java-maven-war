@@ -11,7 +11,7 @@ node{
        slackSend baseUrl: 'https://hooks.slack.com/services/',
        channel: '#cicd-b02',
        color: 'good', 
-       message: 'Welcome to Jenkins, Slack!', 
+       message: 'Jenkins Build Success!', 
        teamDomain: 'vedantek',
        tokenCredentialId: 'slack'
    }
