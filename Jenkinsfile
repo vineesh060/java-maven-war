@@ -9,7 +9,7 @@ node{
    }
    stage('Slack Notification'){
        slackSend baseUrl: 'https://hooks.slack.com/services/',
-       channel: '#cicd-b02',
+       channel: '#cicd-b01',
        color: 'good', 
        message: 'Jenkins Build Success!', 
        teamDomain: 'vedantek',
