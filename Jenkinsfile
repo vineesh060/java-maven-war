@@ -18,6 +18,12 @@ node{
    stage('Upload to S3'){
    s3Upload consoleLogLevel: 'INFO', dontSetBuildResultOnFailure: false, dontWaitForConcurrentBuildCompletion: false, entries: [[bucket: 'stage-repo-cicd', excludedFile: '', flatten: false, gzipFiles: false, keepForever: false, managedArtifacts: false, noUploadOnFailure: false, selectedRegion: 'us-east-1', showDirectlyInBrowser: false, sourceFile: 'target/*.war', storageClass: 'STANDARD', uploadFromSlave: false, useServerSideEncryption: false]], pluginFailureResultConstraint: 'FAILURE', profileName: 'aws-s3', userMetadata: []
    }
+   
+   stage('Deploy to Tomcat'){
+   sshagent(['tomcat-server']) {
+    sh 'scp -o StrictHostKeyChecking=no /var/lib/jenkins/workspace/java-war-cicd/target/myweb-0.0.1.war ubuntu@3.93.144.30:/var/lib/tomcat9/webapps/'
+   }
+   }
    stage('Slack Notification'){
        slackSend baseUrl: 'https://hooks.slack.com/services/',
        channel: '#cicd-b01',
