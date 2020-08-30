@@ -21,7 +21,7 @@ node{
    
    stage('Deploy to Tomcat'){
    
-      ('cp /var/lib/jenkins/workspace/war-pipeline/target/*.war /var/lib/tomcat9/webapp') 
+      ('cp /var/lib/jenkins/workspace/war-pipeline/target/*.war /var/lib/tomcat9/webapp/') 
    
    
    }
