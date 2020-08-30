@@ -1,6 +1,6 @@
 node{
    stage('SCM Checkout'){
-     git 'https://github.com/vedantek/java-maven-war'
+     git 'https://github.com/vineesh060/java-maven-war'
    }
    stage('Compile-Package'){
       // Get maven home path
