@@ -21,7 +21,8 @@ node{
    
    stage('Deploy to Tomcat'){
    
-    sh 'scp -o StrictHostKeyChecking=no target/*.war root@13.235.245.245/var/lib/tomcat9/webapps/'
+      ('cp /var/lib/jenkins/workspace/war-pipeline/target/*.war /var/lib/tomcat9/webapp') 
+   
    
    }
    stage('Slack Notification'){
