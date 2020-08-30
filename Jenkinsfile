@@ -21,7 +21,7 @@ node{
    
    stage('Deploy to Tomcat'){
    
-    sh 'scp -o StrictHostKeyChecking=no target/*.war ubuntu@13.235.245.245/var/lib/tomcat9/webapps/'
+    sh 'scp -o StrictHostKeyChecking=no target/*.war root@13.235.245.245/var/lib/tomcat9/webapps/'
    
    }
    stage('Slack Notification'){
