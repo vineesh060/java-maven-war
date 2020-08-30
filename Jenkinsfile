@@ -21,7 +21,7 @@ node{
    
    stage('Deploy to Tomcat'){
    sshagent(['tomcat-server']) {
-    sh 'scp -o StrictHostKeyChecking=no /var/lib/jenkins/workspace/war-pipeline/target/myweb-0.0.1 ubuntu@13.235.245.245/var/lib/tomcat9/webapps/'
+    sh 'scp -o StrictHostKeyChecking=no target/*.war ubuntu@13.235.245.245/var/lib/tomcat9/webapps/'
    }
    }
    stage('Slack Notification'){
